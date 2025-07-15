@@ -9,6 +9,7 @@ image: '/images/spike.jpg'
 
 {% include embed/youtube.html id='IqysuaDYMnA' %}
 
+Spike's Blog: [https://spikex.dev](https://spikex.dev)
 
 Transcript:
 
