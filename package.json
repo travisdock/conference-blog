@@ -1,0 +1,18 @@
+{
+  "name": "conference-blog",
+  "version": "1.0.0",
+  "description": "A simple static site generator for conference organizing blog posts",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx http-server dist -p 8080"
+  },
+  "keywords": ["static-site", "blog", "conference"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^12.0.0",
+    "front-matter": "^4.0.2",
+    "fs-extra": "^11.2.0"
+  }
+}

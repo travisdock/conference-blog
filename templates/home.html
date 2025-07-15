@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Blog - Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="site-title">Conference Blog</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <input type="text" id="search" placeholder="Search posts..." />
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="hero">
+            <h1>Conference Organizing Insights</h1>
+            <p>Thoughts, tips, and experiences from organizing conferences</p>
+        </div>
+        
+        <div id="search-results" class="search-results" style="display: none;">
+            <h2>Search Results</h2>
+            <div id="results-container"></div>
+        </div>
+        
+        <section class="posts-list" id="posts-list">
+            {{posts}}
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Conference Blog. Built with ❤️ for conference organizers.</p>
+    </footer>
+    
+    <script src="/js/search.js"></script>
+</body>
+</html>
