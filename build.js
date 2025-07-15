@@ -144,6 +144,9 @@ async function copyAssets() {
   if (await fs.pathExists(imagesDir)) {
     await fs.copy(imagesDir, path.join(DIST_DIR, 'images'));
   }
+  
+  // Create CNAME file for custom domain
+  await fs.writeFile(path.join(DIST_DIR, 'CNAME'), 'rubyconferenceproject.com');
 }
 
 async function build() {
