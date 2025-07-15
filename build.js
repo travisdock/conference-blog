@@ -34,10 +34,10 @@ async function getAllPosts() {
 
 async function buildPost(post, postTemplate) {
   let html = postTemplate;
-  html = html.replace('{{title}}', post.title || 'Untitled');
-  html = html.replace('{{date}}', post.date || '');
-  html = html.replace('{{category}}', post.category || 'Uncategorized');
-  html = html.replace('{{content}}', post.html);
+  html = html.replaceAll('{{title}}', post.title || 'Untitled');
+  html = html.replaceAll('{{date}}', post.date || '');
+  html = html.replaceAll('{{category}}', post.category || 'Uncategorized');
+  html = html.replaceAll('{{content}}', post.html);
   
   const postDir = path.join(DIST_DIR, post.slug);
   await fs.ensureDir(postDir);
@@ -54,7 +54,7 @@ async function buildHomepage(posts, homeTemplate) {
       </div>
       <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
     </article>
-  `).join('\\n');
+  `).join('\n');
 
   let html = homeTemplate;
   html = html.replace('{{posts}}', postsList);
