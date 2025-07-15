@@ -77,6 +77,32 @@ async function buildSearchIndex(posts) {
   );
 }
 
+async function buildCategoryPage(category, posts, categoryTemplate) {
+  const categoryPosts = posts.filter(post => post.category === category);
+  if (categoryPosts.length === 0) return;
+  
+  const postsList = categoryPosts.map(post => `
+    <article class="post-preview">
+      <h2><a href="/${post.slug}/">${post.title || 'Untitled'}</a></h2>
+      <div class="post-meta">
+        <span class="date">${post.date || ''}</span>
+        <span class="category">${post.category || 'Uncategorized'}</span>
+      </div>
+      <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
+    </article>
+  `).join('\n');
+
+  let html = categoryTemplate;
+  html = html.replaceAll('{{category}}', category);
+  html = html.replaceAll('{{description}}', `All posts in the ${category} category`);
+  html = html.replaceAll('{{posts}}', postsList);
+  
+  const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+  const categoryDir = path.join(DIST_DIR, `${categorySlug}s`);
+  await fs.ensureDir(categoryDir);
+  await fs.writeFile(path.join(categoryDir, 'index.html'), html);
+}
+
 async function copyAssets() {
   await fs.copy(path.join(TEMPLATES_DIR, 'style.css'), path.join(DIST_DIR, 'css', 'style.css'));
   await fs.copy(path.join(TEMPLATES_DIR, 'search.js'), path.join(DIST_DIR, 'js', 'search.js'));
@@ -92,6 +118,7 @@ async function build() {
   
   const postTemplate = await loadTemplate('post');
   const homeTemplate = await loadTemplate('home');
+  const categoryTemplate = await loadTemplate('category');
   
   const posts = await getAllPosts();
   
@@ -101,6 +128,8 @@ async function build() {
   }
   
   await buildHomepage(posts, homeTemplate);
+  await buildCategoryPage('Interview', posts, categoryTemplate);
+  await buildCategoryPage('Weekly Review', posts, categoryTemplate);
   await buildSearchIndex(posts);
   await copyAssets();
   
