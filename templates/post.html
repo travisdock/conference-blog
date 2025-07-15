@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}} - Conference Blog</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script>
+        // Initialize theme before page renders to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
 <body>
     <header>
@@ -13,6 +20,9 @@
             <div class="nav-links">
                 <a href="/">Home</a>
                 <input type="text" id="search" placeholder="Search posts..." />
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
             </div>
         </nav>
     </header>
@@ -38,5 +48,6 @@
     </footer>
     
     <script src="/js/search.js"></script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>
