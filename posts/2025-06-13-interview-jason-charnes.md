@@ -3,7 +3,7 @@ title: "Interview: Jason Charnes (Organizer)"
 date: 2025-06-13
 category: Interview
 tags: ['organizers']
-image: 'assets/img/post_images/jasonc.png'
+image: '/images/jasonc.png'
 excerpt: Organizer of Southeast Ruby
 ---
 

@@ -20,16 +20,29 @@ async function getAllPosts() {
       const content = await fs.readFile(path.join(POSTS_DIR, file), 'utf-8');
       const { attributes, body } = frontMatter(content);
       
+      // Process YouTube embeds before converting markdown
+      const processedBody = body.replace(
+        /{% include embed\/youtube\.html id='([^']+)' %}/g,
+        '<div class="youtube-embed"><iframe width="560" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>'
+      );
+      
       posts.push({
         ...attributes,
         slug: file.replace('.md', ''),
         content: body,
-        html: marked.parse(body)
+        html: marked.parse(processedBody),
+        // Keep original date for sorting, add formatted date for display
+        originalDate: attributes.date,
+        date: attributes.date ? new Date(attributes.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) : attributes.date
       });
     }
   }
 
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return posts.sort((a, b) => new Date(b.originalDate || b.date) - new Date(a.originalDate || a.date));
 }
 
 async function buildPost(post, postTemplate) {
@@ -45,16 +58,25 @@ async function buildPost(post, postTemplate) {
 }
 
 async function buildHomepage(posts, homeTemplate) {
-  const postsList = posts.map(post => `
+  const postsList = posts.map(post => {
+    const imageHtml = post.image ? `
+      <div class="post-preview-image">
+        <img src="${post.image}" alt="${post.title || 'Post image'}" />
+      </div>` : '';
+    
+    return `
     <article class="post-preview">
-      <h2><a href="/${post.slug}/">${post.title || 'Untitled'}</a></h2>
-      <div class="post-meta">
-        <span class="date">${post.date || ''}</span>
-        <span class="category">${post.category || 'Uncategorized'}</span>
+      ${imageHtml}
+      <div class="post-preview-content">
+        <h2><a href="/${post.slug}/">${post.title || 'Untitled'}</a></h2>
+        <div class="post-meta">
+          <span class="date">${post.date || ''}</span>
+          <span class="category">${post.category || 'Uncategorized'}</span>
+        </div>
+        <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
       </div>
-      <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
-    </article>
-  `).join('\n');
+    </article>`;
+  }).join('\n');
 
   let html = homeTemplate;
   html = html.replace('{{posts}}', postsList);
@@ -81,16 +103,25 @@ async function buildCategoryPage(category, posts, categoryTemplate) {
   const categoryPosts = posts.filter(post => post.category === category);
   if (categoryPosts.length === 0) return;
   
-  const postsList = categoryPosts.map(post => `
+  const postsList = categoryPosts.map(post => {
+    const imageHtml = post.image ? `
+      <div class="post-preview-image">
+        <img src="${post.image}" alt="${post.title || 'Post image'}" />
+      </div>` : '';
+    
+    return `
     <article class="post-preview">
-      <h2><a href="/${post.slug}/">${post.title || 'Untitled'}</a></h2>
-      <div class="post-meta">
-        <span class="date">${post.date || ''}</span>
-        <span class="category">${post.category || 'Uncategorized'}</span>
+      ${imageHtml}
+      <div class="post-preview-content">
+        <h2><a href="/${post.slug}/">${post.title || 'Untitled'}</a></h2>
+        <div class="post-meta">
+          <span class="date">${post.date || ''}</span>
+          <span class="category">${post.category || 'Uncategorized'}</span>
+        </div>
+        <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
       </div>
-      <p>${post.excerpt || post.content.substring(0, 200) + '...'}</p>
-    </article>
-  `).join('\n');
+    </article>`;
+  }).join('\n');
 
   let html = categoryTemplate;
   html = html.replaceAll('{{category}}', category);
@@ -107,6 +138,12 @@ async function copyAssets() {
   await fs.copy(path.join(TEMPLATES_DIR, 'style.css'), path.join(DIST_DIR, 'css', 'style.css'));
   await fs.copy(path.join(TEMPLATES_DIR, 'search.js'), path.join(DIST_DIR, 'js', 'search.js'));
   await fs.copy(path.join(TEMPLATES_DIR, 'theme.js'), path.join(DIST_DIR, 'js', 'theme.js'));
+  
+  // Copy images if they exist
+  const imagesDir = './images';
+  if (await fs.pathExists(imagesDir)) {
+    await fs.copy(imagesDir, path.join(DIST_DIR, 'images'));
+  }
 }
 
 async function build() {

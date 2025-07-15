@@ -3,7 +3,7 @@ title: "Interview: Jeremy Smith (Organizer)"
 date: 2025-05-30
 category: Interview
 tags: ['organizers']
-image: 'assets/img/post_images/jeremy.jpg'
+image: '/images/jeremy.jpg'
 excerpt: Organizer of Blue Ridge Ruby
 ---
 

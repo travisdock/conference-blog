@@ -3,7 +3,7 @@ title: "Interview: Jason Swett (Organizer)"
 date: 2025-06-20
 category: Interview
 tags: ['organizers']
-image: 'assets/img/post_images/jasons.jpg'
+image: '/images/jasons.jpg'
 excerpt: Organizer of Sin City Ruby
 ---
 

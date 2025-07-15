@@ -4,6 +4,7 @@ date: 2025-05-25
 category: Interview
 tags: ['organizers']
 excerpt: Organizer of Rocky Mountain Ruby
+image: '/images/spike.jpg'
 ---
 
 {% include embed/youtube.html id='IqysuaDYMnA' %}

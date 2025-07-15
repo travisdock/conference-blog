@@ -4,7 +4,7 @@ date: 2025-05-16
 category: Interview
 tags: ['organizers']
 excerpt: Organizer of Rocky Mountain Ruby
-image: 'assets/img/post_images/marty.jpg'
+image: '/images/marty.jpg'
 ---
 
 {% include embed/youtube.html id='ZTjCfyZ3dWI' %}
