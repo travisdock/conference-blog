@@ -149,6 +149,13 @@ async function copyAssets() {
   await fs.writeFile(path.join(DIST_DIR, 'CNAME'), 'rubyconferenceproject.com');
 }
 
+async function buildMailingListPage(mailingListTemplate) {
+  const mailingListDir = path.join(DIST_DIR, 'mailing-list');
+  await fs.ensureDir(mailingListDir);
+  await fs.writeFile(path.join(mailingListDir, 'index.html'), mailingListTemplate);
+  console.log('Built: mailing-list');
+}
+
 async function build() {
   console.log('Building site...');
   
@@ -159,6 +166,7 @@ async function build() {
   const postTemplate = await loadTemplate('post');
   const homeTemplate = await loadTemplate('home');
   const categoryTemplate = await loadTemplate('category');
+  const mailingListTemplate = await loadTemplate('mailing-list');
   
   const posts = await getAllPosts();
   
@@ -170,6 +178,7 @@ async function build() {
   await buildHomepage(posts, homeTemplate);
   await buildCategoryPage('Interview', posts, categoryTemplate);
   await buildCategoryPage('Weekly Review', posts, categoryTemplate);
+  await buildMailingListPage(mailingListTemplate);
   await buildSearchIndex(posts);
   await copyAssets();
   
