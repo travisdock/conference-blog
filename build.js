@@ -145,6 +145,15 @@ async function copyAssets() {
     await fs.copy(imagesDir, path.join(DIST_DIR, 'images'));
   }
   
+  // Copy favicon files
+  const faviconDir = './favicon';
+  if (await fs.pathExists(faviconDir)) {
+    const faviconFiles = await fs.readdir(faviconDir);
+    for (const file of faviconFiles) {
+      await fs.copy(path.join(faviconDir, file), path.join(DIST_DIR, file));
+    }
+  }
+  
   // Create CNAME file for custom domain
   await fs.writeFile(path.join(DIST_DIR, 'CNAME'), 'rubyconferenceproject.com');
 }
