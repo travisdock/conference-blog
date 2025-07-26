@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conference Blog - Home</title>
+    <title>About - Conference Blog</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -38,31 +38,25 @@
     </header>
 
     <main>
-        <div class="hero">
-            <h1>Conference Organizing Insights</h1>
-            <p>Thoughts, tips, and experiences from organizing conferences</p>
-            <p>Check out the conference I am organizing <a href='https://blastoffrails.com'>Blastoff Rails!</a></p>
-        </div>
+        <article class="about-page">
+            <header class="page-header">
+                <h1>About This Blog</h1>
+            </header>
 
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search posts..." />
-        </div>
-
-        <div id="search-results" class="search-results" style="display: none;">
-            <h2>Search Results</h2>
-            <div id="results-container"></div>
-        </div>
-        
-        <section class="posts-list" id="posts-list">
-            {{posts}}
-        </section>
+            <div class="page-content">
+                <p>When I started kicking around the idea of organizing a conference I started by talking to other conference organizers; asking how they got started, what to look out for, what to focus on, etc. Without exception, each one said that they had done the exact same thing when they started their conferences. I decided to document the whole process of organizing my very first conference so that someday, hopefully, someone will come to me with those same questions and I will have it all here.</p>
+                <div class="about-cta">
+                    <h3>Check out the Conference I'm Organizing</h3>
+                    <a href="https://blastoffrails.com" class="cta-button">Blastoff Rails</a>
+                </div>
+            </div>
+        </article>
     </main>
-    
+
     <footer>
         <p>&copy; 2024 Conference Blog. Built with ❤️ for conference organizers.</p>
     </footer>
-    
-    <script src="/js/search.js"></script>
+
     <script src="/js/theme.js"></script>
 </body>
 </html>

@@ -166,6 +166,13 @@ async function buildMailingListPage(mailingListTemplate) {
   console.log('Built: mailing-list');
 }
 
+async function buildAboutPage(aboutTemplate) {
+  const aboutDir = path.join(DIST_DIR, 'about');
+  await fs.ensureDir(aboutDir);
+  await fs.writeFile(path.join(aboutDir, 'index.html'), aboutTemplate);
+  console.log('Built: about');
+}
+
 async function build() {
   console.log('Building site...');
   
@@ -177,6 +184,7 @@ async function build() {
   const homeTemplate = await loadTemplate('home');
   const categoryTemplate = await loadTemplate('category');
   const mailingListTemplate = await loadTemplate('mailing-list');
+  const aboutTemplate = await loadTemplate('about');
   
   const posts = await getAllPosts();
   
@@ -189,6 +197,7 @@ async function build() {
   await buildCategoryPage('Interview', posts, categoryTemplate);
   await buildCategoryPage('Weekly Review', posts, categoryTemplate);
   await buildMailingListPage(mailingListTemplate);
+  await buildAboutPage(aboutTemplate);
   await buildSearchIndex(posts);
   await copyAssets();
   
