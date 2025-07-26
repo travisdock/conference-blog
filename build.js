@@ -138,6 +138,7 @@ async function copyAssets() {
   await fs.copy(path.join(TEMPLATES_DIR, 'style.css'), path.join(DIST_DIR, 'css', 'style.css'));
   await fs.copy(path.join(TEMPLATES_DIR, 'search.js'), path.join(DIST_DIR, 'js', 'search.js'));
   await fs.copy(path.join(TEMPLATES_DIR, 'theme.js'), path.join(DIST_DIR, 'js', 'theme.js'));
+  await fs.copy(path.join(TEMPLATES_DIR, 'analytics.js'), path.join(DIST_DIR, 'js', 'analytics.js'));
   
   // Copy images if they exist
   const imagesDir = './images';
