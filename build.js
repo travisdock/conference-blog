@@ -99,6 +99,60 @@ async function buildSearchIndex(posts) {
   );
 }
 
+async function buildSitemap(posts) {
+  const baseUrl = 'https://rubyconferenceproject.com';
+  const currentDate = new Date().toISOString().split('T')[0];
+  
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/about/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/mailing-list/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/interviews/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/weekly-reviews/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+
+  for (const post of posts) {
+    const postDate = post.originalDate ? new Date(post.originalDate).toISOString().split('T')[0] : currentDate;
+    sitemap += `
+  <url>
+    <loc>${baseUrl}/${post.slug}/</loc>
+    <lastmod>${postDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+  }
+
+  sitemap += `
+</urlset>`;
+
+  await fs.writeFile(path.join(DIST_DIR, 'sitemap.xml'), sitemap);
+}
+
 async function buildCategoryPage(category, posts, categoryTemplate) {
   const categoryPosts = posts.filter(post => post.category === category);
   if (categoryPosts.length === 0) return;
@@ -199,6 +253,7 @@ async function build() {
   await buildMailingListPage(mailingListTemplate);
   await buildAboutPage(aboutTemplate);
   await buildSearchIndex(posts);
+  await buildSitemap(posts);
   await copyAssets();
   
   console.log('Build complete!');
