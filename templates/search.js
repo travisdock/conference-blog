@@ -24,6 +24,40 @@ function performSearch(query) {
     return results.slice(0, 10);
 }
 
+function getSearchSnippet(content, query, contextLength = 150) {
+    if (!content || !query) return '';
+    
+    const lowerContent = content.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const index = lowerContent.indexOf(lowerQuery);
+    
+    if (index === -1) {
+        return content.substring(0, 200) + '...';
+    }
+    
+    const halfContext = Math.floor(contextLength / 2);
+    let start = Math.max(0, index - halfContext);
+    let end = Math.min(content.length, index + lowerQuery.length + halfContext);
+    
+    if (start > 0) {
+        start = content.indexOf(' ', start) + 1 || start;
+    }
+    
+    if (end < content.length) {
+        end = content.lastIndexOf(' ', end) || end;
+    }
+    
+    let snippet = content.substring(start, end);
+    
+    if (start > 0) snippet = '...' + snippet;
+    if (end < content.length) snippet = snippet + '...';
+    
+    const regex = new RegExp(`(${query})`, 'gi');
+    snippet = snippet.replace(regex, '<mark>$1</mark>');
+    
+    return snippet;
+}
+
 function displaySearchResults(results, query) {
     const searchResultsDiv = document.getElementById('search-results');
     const resultsContainer = document.getElementById('results-container');
@@ -41,7 +75,7 @@ function displaySearchResults(results, query) {
         postsList.style.display = 'none';
         
         const resultsHTML = results.map(post => {
-            const excerpt = post.content.substring(0, 200) + '...';
+            const snippet = getSearchSnippet(post.content, query);
             return `
                 <div class="search-result">
                     <h3><a href="${post.url}">${post.title}</a></h3>
@@ -49,7 +83,7 @@ function displaySearchResults(results, query) {
                         <span class="date">${post.date || ''}</span>
                         <span class="category">${post.category || 'Uncategorized'}</span>
                     </div>
-                    <p>${excerpt}</p>
+                    <p>${snippet}</p>
                 </div>
             `;
         }).join('');

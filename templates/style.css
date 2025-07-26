@@ -250,6 +250,16 @@ main {
     color: var(--secondary-color);
     font-size: 0.9rem;
 }
+.search-result mark {
+    background-color: #ffeb3b;
+    color: var(--primary-color);
+    padding: 0.1em 0.2em;
+    border-radius: 2px;
+}
+html[data-theme="dark"] .search-result mark {
+    background-color: #ffc107;
+    color: #000;
+}
 
 footer {
     border-top: 1px solid var(--border-color);
