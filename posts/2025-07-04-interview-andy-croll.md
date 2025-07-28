@@ -11,7 +11,7 @@ excerpt: Organizer of Brighton Ruby
 
 Andy's Website: https://andycroll.com/
 
-WEBVTT
+Transcript
 
 Travis Dockter: Okay. So Andy Kroll. Welcome to my kind of casual off the cuff. Very unprofessional unofficial
 Travis Dockter: conference chats that I've been having.
