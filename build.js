@@ -51,6 +51,15 @@ async function buildPost(post, postTemplate) {
   html = html.replaceAll('{{date}}', post.date || '');
   html = html.replaceAll('{{category}}', post.category || 'Uncategorized');
   html = html.replaceAll('{{content}}', post.html);
+  html = html.replaceAll('{{slug}}', post.slug);
+  html = html.replaceAll('{{excerpt}}', post.excerpt || post.content.substring(0, 200).replace(/[<>]/g, '') + '...');
+  
+  // Handle OpenGraph image for interview posts
+  let ogImageTag = '';
+  if (post.category === 'Interview' && post.image) {
+    ogImageTag = `<meta property="og:image" content="https://rubyconferenceproject.com${post.image}" />`;
+  }
+  html = html.replaceAll('{{ogImage}}', ogImageTag);
   
   const postDir = path.join(DIST_DIR, post.slug);
   await fs.ensureDir(postDir);

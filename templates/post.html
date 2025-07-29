@@ -11,6 +11,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="MyWebSite" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- OpenGraph meta tags -->
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{excerpt}}" />
+    <meta property="og:url" content="https://rubyconferenceproject.com/{{slug}}/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Building a Ruby Conference Blog" />
+    {{ogImage}}
     <script>
         // Initialize theme before page renders to prevent flash
         (function() {
