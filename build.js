@@ -61,6 +61,13 @@ async function buildPost(post, postTemplate) {
   }
   html = html.replaceAll('{{ogImage}}', ogImageTag);
   
+  // Handle Twitter image for interview posts
+  let twitterImageTag = '';
+  if (post.category === 'Interview' && post.image) {
+    twitterImageTag = `<meta name="twitter:image" content="https://rubyconferenceproject.com${post.image}" />`;
+  }
+  html = html.replaceAll('{{twitterImage}}', twitterImageTag);
+  
   const postDir = path.join(DIST_DIR, post.slug);
   await fs.ensureDir(postDir);
   await fs.writeFile(path.join(postDir, 'index.html'), html);
