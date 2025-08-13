@@ -3,7 +3,7 @@ title: "Interview: Cirdes Henrique (Organizer)"
 date: 2025-08-08
 category: Interview
 tags: ['organizers']
-image: '/images/cirdes.jpg'
+image: '/images/cirdes.jpeg'
 excerpt: Organizer of Tropical on Rails
 ---
 
