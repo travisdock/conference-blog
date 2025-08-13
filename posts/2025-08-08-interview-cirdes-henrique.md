@@ -10,10 +10,12 @@ excerpt: Organizer of Tropical on Rails
 {% include embed/youtube.html id='mcRUvuQOpU8' %}
 
 Cirdes' X: https://x.com/cirdesh
+
 Cirdes' Linkedin: https://www.linkedin.com/in/cirdesh
+
 Tropical on Rails: https://www.tropicalonrails.com
 
-Transcript
+### Transcript
 
 Travis Dockter: Well, thank you. Serious for joining me for my kind of
 
