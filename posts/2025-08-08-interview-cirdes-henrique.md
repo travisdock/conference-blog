@@ -9,11 +9,11 @@ excerpt: Organizer of Tropical on Rails
 
 {% include embed/youtube.html id='mcRUvuQOpU8' %}
 
-Cirdes' X: https://x.com/cirdesh
+Cirdes' X: [https://x.com/cirdesh](https://x.com/cirdesh)
 
-Cirdes' Linkedin: https://www.linkedin.com/in/cirdesh
+Cirdes' Linkedin: [https://www.linkedin.com/in/cirdesh](https://www.linkedin.com/in/cirdesh)
 
-Tropical on Rails: https://www.tropicalonrails.com
+Tropical on Rails: [https://www.tropicalonrails.com](https://www.tropicalonrails.com)
 
 ### Transcript
 

@@ -10,6 +10,11 @@ excerpt: Organizer of Helvetic Ruby
 {% include embed/youtube.html id='qD_JhCKWw98' %}
 
 ### Links
+Helvetic Ruby: [https://helvetic-ruby.ch](https://helvetic-ruby.ch)
+
+Helvetic Ruby LinkedIn: [https://www.linkedin.com/company/helvetic-ruby](https://www.linkedin.com/company/helvetic-ruby)
+
+Hana's website: [https://hharen.com](https://hharen.com)
 
 ### Transcript
 
