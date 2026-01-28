@@ -20,7 +20,7 @@ Irina's X: [https://x.com/inazarova](https://x.com/inazarova)
 
 Travis Dockter: Okay. Well, welcome, Irina, to my, conference chat. I am speaking to you today because of… SF Ruby, and you are, CEO of Evil Martians, and Evil Martians is an agency that is known for the blog, open source contributions, and now for the SF Ruby Conference. So, just to kind of… Give the… the quick… recap of that, it was 3 days of 30-plus talks, 25 demos, 400-plus attendees, 30 sponsors, this was a… a very… big, complex event that you put on in a pretty short amount of time. What was… could you give us, like, the timeline of… when you were kind of like, okay, we're gonna do this, we're gonna make a conference, until, November? Because I think that was only a couple months, right?
 
-Irina Nazarova: Oh, yeah, hatrice. Thank you so much for having me. I remember we… you mentioned we will have this talk, and I think it's going to be useful for me as well to kind of, like. Go back to it and think about it together.
+Irina Nazarova: Oh, yeah, hey Travis. Thank you so much for having me. I remember we… you mentioned we will have this talk, and I think it's going to be useful for me as well to kind of, like. Go back to it and think about it together.
 
 Travis Dockter: Yeah, do some reflection.
 
